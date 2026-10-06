@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f6f0">
+  <meta name="description" content="A little space for your big plans. Track personal tasks, assignments, and issues with Folio.">
+  <title>Folio — Your task desk</title>
+  <link rel="icon" href="src/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="src/styles.css">
+  <script defer src="src/task-service.js"></script>
+  <script defer src="src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to tasks</a>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <a class="brand" href="./" aria-label="Folio home"><span class="brand-mark" aria-hidden="true">f.</span><span>folio<span class="brand-dot">.</span></span></a>
+      <div class="workspace-label"><span class="workspace-avatar">M</span><div>My workspace<small>A little room to get things done</small></div></div>
+      <p class="nav-label">YOUR DESK</p>
+      <nav>
+        <button class="nav-item active" data-view="all" aria-current="page"><span aria-hidden="true">▤</span>All tasks<span id="nav-all" class="nav-count">0</span></button>
+        <button class="nav-item" data-view="upcoming"><span aria-hidden="true">◷</span>This week<span id="nav-upcoming" class="nav-count">0</span></button>
+        <button class="nav-item" data-view="completed"><span aria-hidden="true">✓</span>Completed<span id="nav-completed" class="nav-count">0</span></button>
+      </nav>
+      <div class="sidebar-note"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M40 69C20 57 24 29 44 32c17 3 7 29 2 27-8-3 5-37 24-40 24-4 12 33 1 38-10 4-5-21 17-23"/><path d="m80 34 9-1-2 10"/></svg><p>Big plans.<br>Small steps.</p><small>Make a little progress today.</small></div>
+      <div class="storage-note"><span class="online-dot" aria-hidden="true"></span>Saved on this browser<small>Your tasks stay on this device.</small></div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <header class="topbar"><span>My workspace <span class="breadcrumb-slash">/</span> <strong id="breadcrumb">All tasks</strong></span><span id="today-label" class="today-label"></span></header>
+      <section class="page-heading" aria-labelledby="page-title"><div><p class="eyebrow">A LITTLE SPACE FOR YOUR BIG PLANS</p><h1 id="page-title">All your tasks<span class="heading-dot">.</span></h1><p id="page-subtitle">Get it out of your head. Take it one task at a time.</p></div><button class="primary" id="new-task"><span aria-hidden="true">＋</span> New task</button></section>
+      <section class="progress-strip" aria-label="Task progress"><div class="progress-caption"><span class="progress-icon" aria-hidden="true">✧</span><div><strong id="progress-title">Let's make a start</strong><p id="progress-copy">Your next small step is waiting.</p></div></div><div class="progress-meter"><div class="progress-label"><span>Overall progress</span><strong id="progress-value">0%</strong></div><progress id="progress" value="0" max="100">0%</progress></div></section>
+      <div class="task-toolbar"><label class="search-control"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search" type="search" placeholder="Search your tasks…" aria-label="Search tasks by title or description"></label><div class="filters"><label><span class="sr-only">Filter by priority</span><select id="priority-filter"><option value="">All priorities</option><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select></label><label><span class="sr-only">Filter by assignee</span><select id="assignee-filter"><option value="">Everyone</option><option value="__unassigned">Unassigned</option></select></label><label><span class="sr-only">Sort tasks</span><select id="sort"><option value="newest">Newest first</option><option value="due">Due date</option><option value="priority">Priority</option><option value="title">Title A–Z</option></select></label></div></div>
+      <div class="list-heading"><div class="status-tabs" id="status-tabs" role="group" aria-label="Filter by status"></div><button id="clear-filters" class="text-button" hidden>Clear filters</button></div>
+      <div id="list-error" class="error-banner" role="alert" hidden><div><strong>We couldn't load your tasks.</strong><p id="list-error-copy"></p></div><button id="retry" class="secondary">Try again</button></div>
+      <section aria-label="Task list" id="task-list" aria-busy="true"><div class="loading-state" role="status">Opening your desk…</div></section>
+      <footer class="list-footer"><span id="result-count">Loading tasks…</span><span>A little progress goes a long way <span aria-hidden="true">↗</span></span></footer>
+    </main>
+  </div>
+  <dialog id="task-panel" class="task-panel" aria-labelledby="panel-title"><div class="panel-header"><span class="eyebrow" id="panel-label">TASK DETAILS</span><button class="icon-button" id="close-panel" aria-label="Close task panel">×</button></div><div id="panel-content"></div></dialog>
+  <dialog id="delete-dialog" class="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-copy"><div class="delete-symbol" aria-hidden="true">×</div><h2 id="delete-title">Delete this task?</h2><p id="delete-copy"></p><p class="dialog-hint">This can't be undone.</p><p id="delete-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button class="secondary" id="cancel-delete" autofocus>Keep task</button><button class="danger" id="confirm-delete">Delete task</button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="noscript">Please enable JavaScript to use Folio and save your tasks.</p></noscript>
+</body>
+</html>
